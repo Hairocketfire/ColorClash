@@ -21,14 +21,20 @@ def shuffle_deck(deck):
     random.shuffle(deck)
     return deck
 
+# Deal the cards
+def deal_cards(deck, num_players=2, cards_per_player=7):
+    players = {}
+    for i in range(num_players):
+        players[f"Spieler {i+1}"] = deck[i*cards_per_player:(i+1)*cards_per_player]
+    return players
+
 # Start the game 
 def start_game():
     deck = create_deck()
     shuffled_deck = shuffle_deck(deck)
     print("Spiel gestartet mit gemischtem Kartenstapel:")
-    print(shuffled_deck[:10])  # Zeige die ersten 10 Karten des gemischten Stapels als Beispiel
-    return shuffled_deck
+    players = deal_cards(shuffled_deck)
+    for player, cards in players.items():
+        print(f"{player} hat folgende Karten: {cards}")
 
-# Spiel starten und gemischten Kartenstapel anzeigen
-shuffled_deck = start_game()
-shuffled_deck[:10]  # Zeige die ersten 10 Karten des gemischten Stapels als Beispiel
+start_game()
